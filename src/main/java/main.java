@@ -10,13 +10,14 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public class main {
+    final static String URL = "https://www.cargurus.com/Cars/inventorylisting/viewDetailsFilterViewInventoryListing.action?maxAccidents=0&zip=06037&maxPrice=70000&maxMileage=40000&hideFrameDamaged=true&showNegotiable=true&sortDir=ASC&sourceContext=carGurusHomePageModel&distance=500&sortType=DEAL_SCORE&entitySelectingHelper.selectedEntity=d2297";
     public static void main(String[] args) {
 
         SafariDriverManager.getInstance(DriverManagerType.SAFARI).setup();
         WebDriver d = new SafariDriver();
 
-        d.get("https://www.cargurus.com/Cars/inventorylisting/viewDetailsFilterViewInventoryListing.action?maxAccidents=0&zip=06037&maxPrice=70000&maxMileage=40000&hideFrameDamaged=true&showNegotiable=true&sortDir=ASC&sourceContext=carGurusHomePageModel&distance=500&sortType=DEAL_SCORE&entitySelectingHelper.selectedEntity=d2297");
-
+        d.get(URL);
+        
         String pageHtml = d.getPageSource();
         int start = pageHtml.indexOf("window.__PREFLIGHT__ = ");
         int end = pageHtml.indexOf("window.__PREFLIGHT__.pageTitle");
