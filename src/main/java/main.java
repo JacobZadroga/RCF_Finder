@@ -11,7 +11,6 @@ import java.util.Iterator;
 
 public class main {
     public static void main(String[] args) {
-        System.out.println("Test");
 
         SafariDriverManager.getInstance(DriverManagerType.SAFARI).setup();
         WebDriver d = new SafariDriver();
