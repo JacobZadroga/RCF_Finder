@@ -28,8 +28,6 @@ public class main {
         }
         System.out.println(data.get("totalListings"));
 
-        System.out.println("-----------------------------------");
-
         JSONArray listings = (JSONArray) data.get("listings");
         //System.out.println(listings.get(0));
 
@@ -52,7 +50,7 @@ public class main {
 
 
         for(RCF car : Fs) {
-            System.out.println("ID : " + car.id);
+            System.out.println("id : " + car.id);
             System.out.println("Year : " + car.year);
             System.out.println("Mileage : " + car.mileage);
             System.out.println("Price : $" + car.price);
