@@ -56,16 +56,35 @@ public class carDB {
 
         ArrayList<RCF> Fs = new ArrayList<RCF>();
 
+        int id;
+        int year;
+        int mileage;
+        double price;
+        String color;
+        double dealScore;
+        String sellerName;
+        String sellerCity;
+        String zipcode;
         for(int i = 0; i < listings.length(); i++) {
             data = (JSONObject) listings.get(i);
+            try { id = (int)data.get("id"); } catch(Exception e) { id = (int)(Math.random() * 999999);}
+            try { year = (int)data.get("carYear"); } catch(Exception e) { year = -1;}
+            try { mileage = (int)data.get("mileage"); } catch(Exception e) { mileage = -1;}
+            try { price = ((BigDecimal)data.get("price")).doubleValue(); } catch(Exception e) { price = -1;}
+            try { color = (String)data.get("exteriorColorName"); } catch(Exception e) { color = "UNKWN";}
+            try { dealScore = ((BigDecimal)data.get("dealScore")).doubleValue(); } catch(Exception e) { dealScore = -99;}
             try {
-                Fs.add(new RCF((int)data.get("id"),(int)data.get("carYear"),(int)data.get("mileage"),((BigDecimal)data.get("price")).doubleValue(),
-                        (String)data.get("exteriorColorName"),((BigDecimal)data.get("dealScore")).doubleValue(),
-                        (String)data.get("serviceProviderName"), (String)data.get("sellerCity"), (String)data.get("sellerPostalCode")));
+                sellerName = (String)data.get("serviceProviderName");
+                if(sellerName.length() > 50) {
+                    sellerName = sellerName.substring(0,50);
+                }
             } catch(Exception e) {
-                System.out.println(e.toString());
+                sellerName = "UNKWN";
             }
+            try { sellerCity = (String)data.get("sellerCity"); } catch(Exception e) { sellerCity = "UNKWN";}
+            try { zipcode = (String)data.get("sellerPostalCode"); } catch(Exception e) { zipcode = "UNKWN";}
 
+            Fs.add(new RCF(id,year,mileage,price,color,dealScore,sellerName,sellerCity,zipcode));
         }
 
         if(insSQL) {
@@ -84,16 +103,17 @@ public class carDB {
                             + "'" + car.sellerName + "',"
                             + "'" + car.sellerCity + "',"
                             + "'" + car.zipcode + "')"
-                            + " ON DUPLICATE KEY UPDATE"
+                            + "\nON DUPLICATE KEY UPDATE"
                             + " year=" + car.year + ","
                             + " mileage=" + car.mileage + ","
                             + " price=" + (int) car.price + ","
                             + " color='" + car.color + "',"
                             + " dealscore=" + car.dealScore + ","
                             + " lastseen='" + car.date + "',"
-                            + " sellername='" + car.year + "',"
-                            + " sellercity='" + car.year + "',"
-                            + " zipcode='" + car.year + "',";
+                            + " sellername='" + car.sellerName + "',"
+                            + " sellercity='" + car.sellerCity + "',"
+                            + " zipcode='" + car.zipcode + "';";
+                    //System.out.println(query);
                     stm.execute(query);
                 }
             } catch(Exception e) {
