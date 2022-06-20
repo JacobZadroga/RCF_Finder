@@ -1,9 +1,12 @@
+package com.carfinder;
+
 import io.github.bonigarcia.wdm.config.DriverManagerType;
-import io.github.bonigarcia.wdm.managers.SafariDriverManager;
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -34,8 +37,8 @@ public class carDB {
 
     public void getListings() {
 
-        SafariDriverManager.getInstance(DriverManagerType.SAFARI).setup();
-        WebDriver d = new SafariDriver();
+        ChromeDriverManager.getInstance(DriverManagerType.CHROME).setup();
+        WebDriver d = new ChromeDriver();
 
         d.get(url);
 
