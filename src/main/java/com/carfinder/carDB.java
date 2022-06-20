@@ -1,3 +1,5 @@
+package com.carfinder;
+
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import org.json.JSONArray;

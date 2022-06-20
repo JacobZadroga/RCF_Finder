@@ -57,7 +57,7 @@
                         <manifest>
 
                             <!-- give full qualified name of your main class-->
-                            <mainClass>main</mainClass>
+                            <mainClass>com.carfinder.main</mainClass>
 
                         </manifest>
                     </archive>

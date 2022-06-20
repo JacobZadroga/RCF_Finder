@@ -1,3 +1,5 @@
+package com.carfinder;
+
 public class RCF implements Comparable<RCF> {
     public int id;
     public int year;
